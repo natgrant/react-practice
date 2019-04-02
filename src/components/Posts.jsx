@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import PostContent from "./PostContent"
+import ApprovalCard from "./ApprovalCard"
 
-const Posts = (props) => {
-  return (
-    <div className="ui container comments">
-      <div className="comment">
-        <a href="/" className="avatar">
-          <img alt="avatar" src={props.avatar}></img>
-        </a>
-        <div className="content"><a href="/" className="author">{props.author}</a>
-          <div className="metadata">
-            <span className='date'>{props.timeAgo}</span>
-          </div>
-          <div className="text">{props.post}</div>
-        </div>
-      </div>
-    </div>
-  );
+import faker from 'faker'
+
+class Posts extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lat: null
+    }
+  }
+  render() {
+    return (
+      <Fragment>
+        <ApprovalCard>
+          <PostContent avatar={faker.image.avatar()} author={faker.name.firstName()} timeAgo="6:30PM" post={faker.lorem.sentence()} />
+        </ApprovalCard>
+        <ApprovalCard>
+          <PostContent avatar={faker.image.avatar()} author={faker.name.firstName()} timeAgo="6:30PM" post={faker.lorem.sentence()} />
+        </ApprovalCard>
+        <ApprovalCard>
+          <PostContent avatar={faker.image.avatar()} author={faker.name.firstName()} timeAgo="6:30PM" post={faker.lorem.sentence()} />
+        </ApprovalCard>
+      </Fragment>
+    );
+  }
 }
 
 export default Posts;
