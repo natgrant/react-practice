@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import Posts from "./Posts"
+import React, { Component } from 'react';
 
 class App extends Component {
   constructor(props) {
@@ -8,19 +7,15 @@ class App extends Component {
       lat: null,
       errMessage: ''
     }
+  }
+
+  componentDidMount = () => {
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          lat: position.coords.latitude
-        })
-      },
-      err => {
-        this.setState({
-          errMessage: err.message
-        })
-      }
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errMessage: err.message })
     );
   }
+
   render() {
     if (this.state.errMessage && !this.state.lat) {
       return <div>Error: {this.state.errMessage}</div>
@@ -29,7 +24,7 @@ class App extends Component {
       return <div>Your latitude: {this.state.lat}</div>
     }
     return (
-      <Posts />
+      <div>Loading... </div>
     )
   }
 }
