@@ -5,7 +5,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      lat: null
+      lat: null,
+      errMessage: ''
     }
     window.navigator.geolocation.getCurrentPosition(
       position => {
@@ -13,16 +14,23 @@ class App extends Component {
           lat: position.coords.latitude
         })
       },
-      err => console.log(err)
+      err => {
+        this.setState({
+          errMessage: err.message
+        })
+      }
     );
   }
   render() {
+    if (this.state.errMessage && !this.state.lat) {
+      return <div>Error: {this.state.errMessage}</div>
+    }
+    if (!this.state.errMessage && this.state.lat) {
+      return <div>Your latitude: {this.state.lat}</div>
+    }
     return (
-      <Fragment>
-        <div>Your latitude: {this.state.lat}</div>
-        <Posts />
-      </Fragment>
-    );
+      <Posts />
+    )
   }
 }
 
