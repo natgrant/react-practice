@@ -20,7 +20,7 @@ class App extends Component {
       return <SeasonDisplay lat={this.state.lat} />
     }
     return (
-      <Loader />
+      <Loader message={'Please accept location request'} />
     )
   }
 }
